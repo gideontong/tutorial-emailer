@@ -1,7 +1,7 @@
+import json
 import smtplib
 
-username = ""
-password = ""
+secrets = json.load("secrets.json")
 
 email = """From: 
 To: example@example.com
@@ -11,6 +11,6 @@ Our body text goes here
 """
 
 server = smtplib.SMTP_SSL("smtp.gmail.com")
-server.login(username, password)
-server.sendmail(username, "example@example.com", email)
+server.login(secrets["username"], secrets["password"])
+server.sendmail(secrets["username"], "example@example.com", email)
 server.close()
