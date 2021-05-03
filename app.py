@@ -1,16 +1,28 @@
 import json
 import smtplib
+import time
 
-secrets = json.load("secrets.json")
+recipients = [
+    "person1@example.com",
+    "person2@example.com",
+    "person3@example.com"
+]
 
-email = """From: 
-To: example@example.com
-Subject: Example subject
+secrets = json.load(open("secrets.json"))
 
-Our body text goes here
-"""
 
 server = smtplib.SMTP_SSL("smtp.gmail.com")
 server.login(secrets["username"], secrets["password"])
-server.sendmail(secrets["username"], "example@example.com", email)
+# server.sendmail(secrets["username"], secrets["username"], email)
+
+for recipient in recipients:
+    email = f"""From: {secrets["username"]}
+    To: {recipient}
+    Subject: Test email
+
+    Hello world from our first email!
+    """
+    
+    server.sendmail(secrets["username"], recipient, email)
+
 server.close()
