@@ -1,0 +1,3 @@
+person1@example.com
+person2@example.com
+person3@example.com
